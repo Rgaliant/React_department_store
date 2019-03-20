@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
-import { Button, Header, Segment } from 'semantic-ui-react'
+import Products from "./Products"
+import { Button, Header, Segment, Card } from 'semantic-ui-react'
 
 export default class DepartmentView extends React.Component {
   state = { department: {}, }
@@ -12,6 +13,7 @@ export default class DepartmentView extends React.Component {
     })
   }
 
+
   render() {
       const { name, description } = this.state.department
     return (
@@ -22,6 +24,7 @@ export default class DepartmentView extends React.Component {
         </Segment>
         <br />
         <br />
+        <Products departmentId={this.props.match.params.id} />
         <Button 
           color="black" 
           onClick={this.props.history.goBack}

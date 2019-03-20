@@ -39,12 +39,14 @@ class Departments extends React.Component {
   render() {
     return (
       <div>
-        <Header as="h1">Departments</Header>
+        <Header as="h1" style={{ textAlign: "center" }}>Departments</Header>
         <br />
         <Button as={Link} color="blue" to="/departments/new">
           Add Department
         </Button>
-        <Card.Group>
+        <br />
+        <br />
+        <Card.Group itemsPerRow={5}>
           { this.renderDepartments() }
         </Card.Group>
       </div>
