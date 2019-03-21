@@ -3,8 +3,8 @@ import axios from "axios";
 import { Form, Header, } from "semantic-ui-react";
 
 class DepartmentsForm extends React.Component {
-  defaultValues = { name: "", description: "" };
-  state = { ...this.defaultValues, };
+  state = { name: "", description: "" };
+ 
 
   componentDidMount() {
     if (this.props.id)
@@ -13,16 +13,19 @@ class DepartmentsForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const department = { ...this.state, };
-    if (this.id) {
-      this.updateDepartment( ...this.state, )
-    } else {
-    axios.post("/api/departments", department)
+    const { id, updateDepartment } = this.props;
+    const department = this.state
+    if (id) 
+      axios.put(`/api/departments/${id}`, department)
+        .then( res => {
+          updateDepartment( res.data, )
+      })
+    else 
+     axios.post("/api/departments", department)
       .then( res => {
         this.props.history.push("/departments");
       })
-    this.setState({ ...this.defaultValues, });
-    }
+    this.setState({ name: "", description: "" }); 
   }
   
 
@@ -36,7 +39,12 @@ class DepartmentsForm extends React.Component {
 
     return (
       <div>
-        <Header as="h1">New Department</Header>
+        {
+          this.props.id ?
+          <div></div>
+          :
+          <Header as='h1'>New Department</Header>
+        }
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths="equal">
             <Form.Input

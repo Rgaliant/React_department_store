@@ -4,13 +4,12 @@
     description: Faker::Lorem.sentence,
   )
   10.times do
-    product = Product.create(
+    product = department.products.create(
       name: Faker::Commerce.product_name,
       description: Faker::Lorem.sentence,
       price: Faker::Commerce.price.to_f,
-      department_id: department.id
     )
   end
 end
 
-puts "100 Products Seeded"
+puts " 10 departments seeded 100 Products Seeded"

@@ -1,6 +1,7 @@
 class Api::ProductsController < ApplicationController
-  before_action :set_department
   before_action :set_product, only: [:create, :update, :destroy]
+  before_action :set_department
+  
 
   def index
     render json: @department.products.all
@@ -35,11 +36,11 @@ class Api::ProductsController < ApplicationController
   private
 
   def set_product
-    params.require(:product).permit(:name, :description, :price)
+    @product = Product.find(params[:id])
   end
 
   def product_params
-    @product = @department.product.find(params[:id])
+    params.require(:product).permit(:name, :description, :price)
   end
 
   def set_department

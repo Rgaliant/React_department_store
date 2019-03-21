@@ -3,7 +3,7 @@ import { Link, } from 'react-router-dom';
 import { Menu, } from "semantic-ui-react";
 
 const Navbar = () => (
-  <Menu>
+  <Menu fluid vertical tabular>
     <Link to="/">
       <Menu.Item>
         Home

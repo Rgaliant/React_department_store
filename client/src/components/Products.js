@@ -1,6 +1,6 @@
 import React from "react";
 import axios from 'axios'
-import { Card, Header, } from "semantic-ui-react";
+import { Card, Header, Button, Icon } from "semantic-ui-react";
 
 class Products extends React.Component {
   state = { products: [] }
@@ -13,6 +13,15 @@ class Products extends React.Component {
             })
     }
 
+    deleteProduct = (id) => {
+      const { departmentId } = this.props
+      axios.delete(`/api/departments/${departmentId}/products/${id}`)
+      .then( res => {
+        const { products, } = this.state
+        this.setState({ products: products.filter( t => t.id !== id), })
+      })
+    }
+
   renderProducts = () => {
     const { products, } = this.state;
 
@@ -22,10 +31,20 @@ class Products extends React.Component {
       <Card>
         <Card.Content>
           <Card.Header>{ product.name }</Card.Header>
-          <Card.Meta>{ product.department }</Card.Meta>
+          <Card.Meta>${ product.price }</Card.Meta>
           <Card.Description>
             { product.description }
           </Card.Description>
+          <br />
+          <Button 
+            icon 
+            color="red" 
+            size="tiny" 
+            onClick={() => this.deleteProduct(product.id)} 
+            style={{ marginLeft: "15px", }}
+          >
+      <Icon name="trash" />
+    </Button>
         </Card.Content>
       </Card>
     ))

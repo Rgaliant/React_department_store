@@ -9,6 +9,8 @@ class Departments extends React.Component {
             editing: false,
   }
 
+  toggleEdit = () => this.setState({ editing: !this.state.editing, });
+
   componentDidMount() {
     axios.get(`/api/departments`)
     .then( res => {
@@ -16,17 +18,16 @@ class Departments extends React.Component {
     })
   }
 
-  updateDepartment= (id) => {
-    axios.put(`/api/departments/${id}`)
-    .then( res => {
-      const departments = this.state.departments.map( t => {
-      if (t.id === id)
-        return res.data;
-      return t;
-    });
-    this.setState({ departments, });
-  })
-  }
+
+  updateDepartment = (department) => {
+    const departments = this.state.departments.map(d => {
+        if (d.id === department.id)
+            return department;
+        return d
+    })
+    this.setState({ departments });
+    this.toggleEdit()
+}
 
   deleteDepartment = (id) => {
     axios.delete(`/api/departments/${id}`)
@@ -35,9 +36,6 @@ class Departments extends React.Component {
         this.setState({ departments: departments.filter( t => t.id !== id), })
       })
   }
-
-  
-  toggleEdit = () => this.setState({ editing: !this.state.editing, });
 
 
   renderDepartments = () => {
@@ -50,10 +48,10 @@ class Departments extends React.Component {
         <Card.Content>
         {
           this.state.editing ? 
-          <DepartmentsForm { ...this.props } />
+          <DepartmentsForm name={department.name} id={department.id} description={department.description} updateDepartment={this.updateDepartment} />
           :
           <div>
-          <Card.Header>{ department.name }</Card.Header>
+          <Card.Header as={Link} to={`/departments/${department.id}`} >{department.name}</Card.Header>
           <Card.Meta>And More</Card.Meta>
           <Card.Description>
             { department.description }

@@ -24,7 +24,8 @@ export default class DepartmentView extends React.Component {
         </Segment>
         <br />
         <br />
-        <Products departmentId={this.props.match.params.id} />
+        <Products departmentId={this.props.match.params.id} deleteProduct={this.props.match.params.id} />
+        <br />
         <Button 
           color="black" 
           onClick={this.props.history.goBack}
@@ -35,3 +36,4 @@ export default class DepartmentView extends React.Component {
     )
   }
 }
+
