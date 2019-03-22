@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Products from "./Products"
-import { Button, Header, Segment, Card } from 'semantic-ui-react'
+import { Button, Header, Segment, Card, Image } from 'semantic-ui-react'
 
 export default class DepartmentView extends React.Component {
   state = { department: {}, }
@@ -18,8 +18,21 @@ export default class DepartmentView extends React.Component {
       const { name, description } = this.state.department
     return (
       <div>
-        <Segment>
         <Header as="h1">{ name }</Header>
+        <Segment>
+          <div style={{ 
+          display: 'flex',
+          justifyContent: 'center',
+          }} >
+        <Image 
+              style={{
+                height: '350px',
+                width: '500px',
+              }}
+              src={'https://loremflickr.com/400/400/commerce?' + Math.random()}
+              alt="Department"
+            />
+            </div>
           <p>{ description }</p>
         </Segment>
         <br />

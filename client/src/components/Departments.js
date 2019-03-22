@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, } from "react-router-dom";
-import { Card, Header, Button, Icon } from "semantic-ui-react";
+import { Card, Header, Button, Icon, Image } from "semantic-ui-react";
 import axios from "axios"
 import DepartmentsForm from './DepartmentsForm'
 
@@ -46,6 +46,14 @@ class Departments extends React.Component {
     return departments.map( department => (
       <Card>
         <Card.Content>
+        <Image 
+              style={{
+                height: '120px',
+                width: '160px',
+              }}
+              src={'https://loremflickr.com/400/400/commerce?' + Math.random()}
+              alt="Department"
+            />
         {
           this.state.editing ? 
           <DepartmentsForm name={department.name} id={department.id} description={department.description} updateDepartment={this.updateDepartment} />
@@ -94,7 +102,7 @@ class Departments extends React.Component {
         </Button>
         <br />
         <br />
-        <Card.Group itemsPerRow={5}>
+        <Card.Group itemsPerRow={3} style={{ overFlow: 'hidden' }}>
           { this.renderDepartments() }
         </Card.Group>
       </div>

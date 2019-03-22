@@ -1,17 +1,21 @@
 import React from 'react';
 import { Link, } from 'react-router-dom';
-import { Menu, } from "semantic-ui-react";
+import { Menu, Segment } from "semantic-ui-react";
 
 const Navbar = () => (
-  <Menu fluid vertical tabular>
+  <Menu>
     <Link to="/">
       <Menu.Item>
-        Home
+        <Segment>
+          Home
+        </Segment>
       </Menu.Item>
     </Link>
     <Link to="/departments">
       <Menu.Item>
-        Departments
+        <Segment>
+          Departments
+        </Segment>
       </Menu.Item>
     </Link>
   </Menu>

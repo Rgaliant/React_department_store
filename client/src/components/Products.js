@@ -1,6 +1,6 @@
 import React from "react";
 import axios from 'axios'
-import { Card, Header, Button, Icon } from "semantic-ui-react";
+import { Card, Header, Button, Icon, Image } from "semantic-ui-react";
 
 class Products extends React.Component {
   state = { products: [] }
@@ -22,6 +22,10 @@ class Products extends React.Component {
       })
     }
 
+    editProduct = (id) => {
+      
+    }
+
   renderProducts = () => {
     const { products, } = this.state;
 
@@ -31,6 +35,14 @@ class Products extends React.Component {
       <Card>
         <Card.Content>
           <Card.Header>{ product.name }</Card.Header>
+          <Image 
+              style={{
+                height: '120px',
+                width: '160px',
+              }}
+              src={'https://loremflickr.com/400/400/products?' + Math.random()}
+              alt="Department"
+            />
           <Card.Meta>${ product.price }</Card.Meta>
           <Card.Description>
             { product.description }
@@ -45,6 +57,15 @@ class Products extends React.Component {
           >
       <Icon name="trash" />
     </Button>
+    <Button 
+            icon 
+            color="blue" 
+            size="tiny" 
+            onClick={() => this.editProduct(product.id)} 
+            style={{ marginLeft: "15px", }}
+          >
+      <Icon name="pencil" />
+    </Button>
         </Card.Content>
       </Card>
     ))
@@ -55,7 +76,7 @@ class Products extends React.Component {
       <div>
         <Header as="h1">Products</Header>
         <br />
-        <Card.Group>
+        <Card.Group itemsPerRow={5}>
           { this.renderProducts() }
         </Card.Group>
       </div>
